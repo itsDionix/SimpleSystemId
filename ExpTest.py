@@ -45,7 +45,7 @@ print(" ** Exponential identification test ** ")
 
 x0 = 2
 xf = 1
-tau = 10
+tau = 2*60
 
 
 def real_x(t):
@@ -53,19 +53,20 @@ def real_x(t):
 
 
 rng = np.random.default_rng()
-predT = tau*1
+predT = 30
 totalT = tau*5
-N = 2000
+f = 3
+N = predT*f
 Ts = predT/(N-1)
 # Interval between samples used for regression
-dn = int((N/2)/4)
-print(f"dn is {dn:d}")
+dn = int((N/2))
+print(f"Nis {N:d} and dn is {dn:d}")
 dt = dn*Ts
 m = np.exp(-dt/tau)
 c = xf*(1-m)
 n = np.linspace(0, predT, N)
-noise_p = 0.5
-noise = rng.normal(size=N)*(x0 - real_x(predT/tau))*noise_p
+noise_p = 0.1 / 100
+noise = rng.normal(size=N)*x0*noise_p
 x = real_x(n)
 y = x + noise
 
@@ -83,7 +84,7 @@ fig = plt.figure()
 ax = fig.gca()
 plott = np.linspace(0, totalT, 10001)
 ax.plot(plott, real_x(plott), linewidth=1, label="Original exponential")
-ax.scatter(n, y, marker=".", c="C01", s=1)
+ax.scatter(n, y, marker=".", c="C01", s=10)
 
 # Fit with C no reps
 CovData = RecCovData()
@@ -181,7 +182,7 @@ cryfs = np.empty_like(fyfs)
 crtaus = np.empty_like(fyfs)
 
 for test in range(tests):
-    noise = rng.normal(size=N)*(x0 - real_x(predT/tau))*noise_p
+    noise = rng.normal(size=N)*x0*noise_p
     y = x + noise
 
     # Fit scipy
