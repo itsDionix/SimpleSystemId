@@ -28,8 +28,8 @@ RecRegIter.argtypes = [C.c_double, C.c_double,
 
 N = 200000
 rng = np.random.default_rng()
-m = -54000
-c = 33000
+m = -54
+c = 33
 x = rng.uniform(size=N)
 noise = rng.normal(size=N)
 y = x*m + c + noise
