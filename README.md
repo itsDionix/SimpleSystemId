@@ -1,9 +1,9 @@
 # SimpleSystemId
 Implementation of online system identification given by y[n] = ay[n-1] + b for unkown a and b. Implementted in C, includes a python tests script.
 
-One example use case is estimating the final value of a signal of type exp(-t/tau)(v0 - vf) + vf from noise samples. The next image presents example results. 
+One example use case is estimating the final value of a signal of type exp(-t/tau)(v0 - vf) + vf from noisy samples. The next image presents example results. 
 
-The blue line is the original signal, the orande dots are the noisy samples, the red dashed exponential is the prediction from a SciPy fitting method to the samples and the horizontal line is the predicted vf from this code.
+The blue line is the original signal, the orange dots are the noisy samples, the red dashed exponential is the prediction from a SciPy fitting method to the samples and the horizontal line is the predicted vf from this code.
 
 ![Example system identification](readme_fig.jpeg?raw=true "Example system identification")
 
