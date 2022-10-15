@@ -25,3 +25,15 @@ int RecursiveLinReg(double new_x, double new_y, struct RecursiveLinRegData *Data
     }
     return 0;
 }
+
+int GetLineFromCovData(struct RecursiveCovarianceData *DataPtr, double *m, double *c) {
+    double lambda;
+
+    // Get biggest eigvalue from Cov matrix
+    lambda = (DataPtr->Cx + DataPtr->Cy) / 2 +
+             sqrt(pow((DataPtr->Cx - DataPtr->Cy) / 2, 2) + pow(DataPtr->C, 2));
+    *m = (lambda - DataPtr->Cx) / DataPtr->C;
+    *c = DataPtr->yMean - DataPtr->xMean * (*m);
+
+    return 0;
+}

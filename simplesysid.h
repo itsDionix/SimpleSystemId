@@ -1,10 +1,6 @@
 #ifndef SIMPLESYSID_H_INCLUDED
 #define SIMPLESYSID_H_INCLUDED
-
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <math.h>
 
 struct RecursiveCovarianceData {
     /* Data for covariance matrix of two variables x and y
@@ -32,5 +28,7 @@ int RecursiveCovariance(double new_x, double new_y, struct RecursiveCovarianceDa
 int RecursiveLinReg(double new_x, double new_y, struct RecursiveLinRegData *DataPtr);
 /* One iteration of calculating a simple recursive linear regression
  */
-
+int GetLineFromCovData(struct RecursiveCovarianceData *DataPtr, double *m, double *c);
+/* Get a line, 'y = mx + c', passing through the center of mass in the principal axis direction.
+ */
 #endif
