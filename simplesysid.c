@@ -17,21 +17,11 @@ int RecursiveCovariance(double new_x, double new_y, struct RecursiveCovarianceDa
 
 int RecursiveLinReg(double new_x, double new_y, struct RecursiveLinRegData *DataPtr) {
     RecursiveCovariance(new_x, new_y, DataPtr->CovData);
-    if (DataPtr->CovData->n > 1) {
-	DataPtr->m = DataPtr->CovData->C / DataPtr->CovData->Cx;
-	DataPtr->c = DataPtr->CovData->yMean - DataPtr->m * DataPtr->CovData->xMean;
+    if (DataPtr->CovData->n > 0) {
+        DataPtr->m = DataPtr->CovData->C / DataPtr->CovData->Cx;
+        DataPtr->c = DataPtr->CovData->yMean - DataPtr->m * DataPtr->CovData->xMean;
     } else {
-	DataPtr->c = new_y;
+        DataPtr->c = new_y;
     }
     return 0;
-    ;
-}
-
-int RecursiveSysId(double new_x, struct RecursiveLinRegData *DataPtr) {
-    RecursiveCovariance(new_x, new_x, DataPtr->CovData);
-    DataPtr->m = DataPtr->CovData->C / DataPtr->CovData->Cx;
-    DataPtr->c = DataPtr->CovData->yMean - DataPtr->m * DataPtr->CovData->xMean;
-
-    return DataPtr->CovData->n;
-    ;
 }
